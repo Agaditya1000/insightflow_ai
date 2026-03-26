@@ -115,7 +115,8 @@ export default function ChatPane({ isOpen, onHighlight }) {
     setMessages(prev => [...prev, { role: 'agent', loading: true, id: loadingId }]);
 
     try {
-      const res = await axios.post('http://localhost:3001/api/chat', { message: msg });
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+      const res = await axios.post(`${API_URL}/chat`, { message: msg });
       const { answer, sql, data } = res.data;
 
       setMessages(prev => prev.map(m =>

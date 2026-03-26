@@ -42,7 +42,8 @@ export default function GraphPane({ highlightIds, setSelectedNode }) {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/graph')
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+    axios.get(`${API_URL}/graph`)
       .then(r => {
         const { nodes, edges } = r.data;
         setGraphData({
